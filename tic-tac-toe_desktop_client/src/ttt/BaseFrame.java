@@ -1,6 +1,10 @@
 package ttt;
 
+import java.awt.BorderLayout;
+
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 public class BaseFrame extends JFrame
 {
@@ -10,6 +14,9 @@ public class BaseFrame extends JFrame
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setTitle("Tic-Tac-Toe");
 		
+		Panel_Registration panelRegistration = new Panel_Registration();
+		add(panelRegistration,BorderLayout.CENTER);
+		panelRegistration.setVisible(true);
 		
 		setVisible(true);
 	}
