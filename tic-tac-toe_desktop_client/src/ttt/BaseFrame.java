@@ -13,27 +13,43 @@ import javax.swing.JPanel;
 
 public class BaseFrame extends JFrame
 {
-	public static String stringRegistration = "Panel Registration";
-	public static String stringAuthorization = "Panel Authorization";
-	 CardLayout cl;
+	public static String stringAuthorization = "panelAuthorization";
+	public static String stringRegistration = "panelRegistration";
+	public static String stringPlayersOnline = "panelPlayersOnline";
+	public static String stringTopPlayers = "panelTopPlayers";
+	public static String stringGame = "panelGame";
+	public static String stringGameOver = "panelGameOver";
+	CardLayout cards;
 	 
 	public BaseFrame()
 	{
 		setBounds(320, 200, 450, 425);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setTitle("Tic-Tac-Toe");
-		setLayout(new CardLayout());
-		
-		PanelRegistration panelRegistration = new PanelRegistration();
-		panelRegistration.setVisible(true);
+		cards = new CardLayout();
+		setLayout(cards);
 		
 		PanelAuthorization panelAuthorization = new PanelAuthorization();
-		panelAuthorization.setVisible(false);
+		PanelRegistration panelRegistration = new PanelRegistration();
+		PanelPlayersOnline panelPlayersOnline = new PanelPlayersOnline();
+		PanelTopPlayers panelTopPlayers = new PanelTopPlayers();
+		PanelGame panelGame = new PanelGame();
+		PanelGameOver panelGameOver = new PanelGameOver();
 		
-		add(stringRegistration,panelRegistration);
-		add(stringAuthorization,panelAuthorization);
+		
+		this.add(stringAuthorization,panelAuthorization);
+		this.add(stringRegistration,panelRegistration);
+		this.add(stringPlayersOnline,panelPlayersOnline);
+		this.add(stringTopPlayers,panelTopPlayers);
+		this.add(stringGame,panelGame);
+		this.add(stringGameOver,panelGameOver);
 		
 		
 		setVisible(true);
+	}
+	
+	public CardLayout getCards()
+	{
+		return cards;
 	}
 }
