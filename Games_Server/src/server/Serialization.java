@@ -14,13 +14,13 @@ public class Serialization {
 		
 	}
 	
-	public static Object fromJSON(String jsonString){
+	public static User fromJSON(String jsonString){
 		
 		Gson gson = new Gson();
-		Type objectType = new TypeToken<Object>(){}.getType();
-		Object inputObject = gson.fromJson(jsonString, objectType);
+		Type objectType = new TypeToken<User>(){}.getType();
+		User user = gson.fromJson(jsonString, objectType);
 		
-		return inputObject;
+		return user;
 		
 	}
 	

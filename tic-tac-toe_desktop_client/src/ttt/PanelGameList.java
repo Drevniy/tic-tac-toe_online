@@ -13,21 +13,22 @@ import javax.swing.JScrollPane;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.SwingConstants;
 
-public class PanelPlayerStatistic extends JPanel {
+public class PanelGameList extends JPanel {
 
 	/**
 	 * Create the panel.
 	 */
-	public PanelPlayerStatistic() {
+	public PanelGameList() {
 		
-		JLabel lblPlayerStatistics = new JLabel("Player statistics:");
-		lblPlayerStatistics.setFont(new Font("Dialog", Font.PLAIN, 25));
-		lblPlayerStatistics.setHorizontalAlignment(SwingConstants.LEFT);
+		JLabel lblChooseGame = new JLabel("Choose game:");
+		lblChooseGame.setFont(new Font("Dialog", Font.PLAIN, 34));
+		lblChooseGame.setHorizontalAlignment(SwingConstants.LEFT);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		
-		JButton btnCancel = new JButton("Cancel");
-		btnCancel.addActionListener(new ActionListener() {
+		JButton btnOk = new JButton("Ok");
+		btnOk.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		btnOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
@@ -38,25 +39,27 @@ public class PanelPlayerStatistic extends JPanel {
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()
 							.addContainerGap()
-							.addComponent(lblPlayerStatistics, GroupLayout.PREFERRED_SIZE, 189, GroupLayout.PREFERRED_SIZE))
-						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 450, GroupLayout.PREFERRED_SIZE)
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addComponent(scrollPane, GroupLayout.DEFAULT_SIZE, 440, Short.MAX_VALUE)
+								.addComponent(lblChooseGame)))
 						.addGroup(groupLayout.createSequentialGroup()
-							.addGap(160)
-							.addComponent(btnCancel, GroupLayout.PREFERRED_SIZE, 114, GroupLayout.PREFERRED_SIZE)))
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+							.addGap(162)
+							.addComponent(btnOk, GroupLayout.PREFERRED_SIZE, 127, GroupLayout.PREFERRED_SIZE)))
+					.addContainerGap())
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(lblPlayerStatistics, GroupLayout.PREFERRED_SIZE, 42, GroupLayout.PREFERRED_SIZE)
+					.addComponent(lblChooseGame, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 265, GroupLayout.PREFERRED_SIZE)
+					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 257, GroupLayout.PREFERRED_SIZE)
 					.addGap(18)
-					.addComponent(btnCancel, GroupLayout.PREFERRED_SIZE, 37, GroupLayout.PREFERRED_SIZE)
+					.addComponent(btnOk, GroupLayout.PREFERRED_SIZE, 38, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap(21, Short.MAX_VALUE))
 		);
 		setLayout(groupLayout);
 
 	}
+
 }

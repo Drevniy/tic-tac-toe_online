@@ -1,18 +1,17 @@
 package ttt;
 
-import javax.swing.JPanel;
-import javax.swing.JLabel;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.GridLayout;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
-import java.awt.Font;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import java.awt.CardLayout;
-import java.awt.GridLayout;
-import javax.swing.SwingConstants;
-import javax.swing.border.BevelBorder;
-import java.awt.Color;
-import javax.swing.border.LineBorder;
 import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.SwingConstants;
+import javax.swing.border.LineBorder;
 
 public class PanelGame extends JPanel {
 

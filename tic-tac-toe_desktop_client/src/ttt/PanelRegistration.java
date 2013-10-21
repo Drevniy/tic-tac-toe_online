@@ -1,8 +1,11 @@
 package ttt;
 
+import java.awt.CardLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.net.UnknownHostException;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -46,6 +49,25 @@ public class PanelRegistration extends JPanel {
 		
 		JButton btnCreateAccount = new JButton("Create account");
 		btnCreateAccount.setFont(new Font("Tahoma", Font.PLAIN, 17));
+		btnCreateAccount.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				User user = new User();
+				user.setKeyWord("registration");
+				user.setUserName(textUserName.getText());
+				user.setEmail(textEmail.getText());
+				user.setPassword(textPassword.getText());
+				
+				try {
+					Security.registration(user);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+			}
+		});
 		
 		JButton btnCancel = new JButton("Cancel");
 		btnCancel.setFont(new Font("Tahoma", Font.PLAIN, 14));

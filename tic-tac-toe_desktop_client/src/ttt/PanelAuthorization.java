@@ -4,6 +4,11 @@ import java.awt.CardLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.net.Socket;
+import java.net.UnknownHostException;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -37,14 +42,35 @@ public class PanelAuthorization extends JPanel {
 		
 		JButton btnLogIn = new JButton("Log in");
 		btnLogIn.setFont(new Font("Tahoma", Font.PLAIN, 23));
+		btnLogIn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				User user = new User();
+				user.setKeyWord("authorization");
+				user.setUserName(textUserName.getText());
+				user.setPassword(textPassword.getText());
+				try {
+					Security.authorization(user);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+				BaseFrame frame = (BaseFrame) PanelAuthorization.this.getParent().getParent().getParent().getParent();
+				CardLayout cards = (CardLayout) frame.getContentPane().getLayout();
+				cards.show(frame.getContentPane(), BaseFrame.stringPlayersOnline);
+			}
+		});
 		
 		JButton btnRegistration = new JButton("Registration");
 		btnRegistration.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnRegistration.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				BaseFrame frame = (BaseFrame) PanelAuthorization.this.getParent().getParent().getParent().getParent();
-				CardLayout c = (CardLayout) frame.getContentPane().getLayout();
-				c.show(frame.getContentPane(), "panelRegistration");
+				CardLayout cards = (CardLayout) frame.getContentPane().getLayout();
+				cards.show(frame.getContentPane(), "panelRegistration");
 			}
 		});
 		

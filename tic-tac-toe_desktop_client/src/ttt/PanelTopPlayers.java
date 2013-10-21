@@ -1,17 +1,14 @@
 package ttt;
 
-import javax.swing.JPanel;
+import java.awt.Font;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.JButton;
 import javax.swing.JLabel;
-import java.awt.Font;
-import javax.swing.JTable;
-import javax.swing.JScrollBar;
-import java.awt.Scrollbar;
+import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.JButton;
-import javax.swing.JPasswordField;
 
 public class PanelTopPlayers extends JPanel {
 

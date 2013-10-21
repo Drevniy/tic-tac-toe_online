@@ -18,27 +18,26 @@ public class Server_Main {
 	public static void main(String[] args) throws IOException, NoSuchFieldException, SecurityException, ClassNotFoundException, SQLException
 	{
 		ServerSocket serverSocket = new ServerSocket(7000);
-		
+		System.out.println("server started");
 		while(true){
 			Socket socket = serverSocket.accept();
 			InputStream socketin = socket.getInputStream();
 			DataInputStream in = new DataInputStream(socketin);
 			inputString = in.readUTF();
 			
-			Object inputObject = Serialization.fromJSON(inputString);
-			Field keyWord = inputObject.getClass().getDeclaredField("keyWord");
-			Field userName = inputObject.getClass().getDeclaredField("userName");
-			if(keyWord.equals("registration")){
-				Security.registration(inputObject);
+			User user = Serialization.fromJSON(inputString);
+			if(user.getKeyWord().equals("registration")){
+				Security.registration(user);
 			}
 
-			if(keyWord.equals("authorization")){
-				if(Security.authorization(inputObject)){
+			if(user.getKeyWord().equals("authorization")){
+				if(Security.authorization(user)){
 					Sockets newSocket = new Sockets();
 					newSocket.setSocket(socket);
-					newSocket.setUserName(userName.toString());
+					newSocket.setUserName(user.getUserName());
 					getSocketsList().add(newSocket);
 				}
+				System.out.println(getSocketsList().get(0).getUserName());
 			}
 			
 			//socketin.flush();

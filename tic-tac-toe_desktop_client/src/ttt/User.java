@@ -1,4 +1,4 @@
-package server;
+package ttt;
 
 public class User {
 	

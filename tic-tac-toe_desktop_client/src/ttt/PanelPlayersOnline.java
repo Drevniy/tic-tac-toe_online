@@ -1,12 +1,13 @@
 package ttt;
 
-import javax.swing.JPanel;
+import java.awt.Font;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
-import javax.swing.JLabel;
-import java.awt.Font;
-import javax.swing.JScrollPane;
 import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class PanelPlayersOnline extends JPanel {

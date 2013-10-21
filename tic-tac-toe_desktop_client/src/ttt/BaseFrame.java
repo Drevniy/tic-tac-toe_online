@@ -1,15 +1,8 @@
 package ttt;
 
-import java.awt.BorderLayout;
 import java.awt.CardLayout;
-import java.awt.Component;
-import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.LayoutManager;
 
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
 
 public class BaseFrame extends JFrame
 {
@@ -17,6 +10,8 @@ public class BaseFrame extends JFrame
 	public static String stringRegistration = "panelRegistration";
 	public static String stringPlayersOnline = "panelPlayersOnline";
 	public static String stringTopPlayers = "panelTopPlayers";
+	public static String stringPlayerStatistic = "panelPlayerStatistic";
+	public static String stringGameList = "panelGameList";
 	public static String stringGame = "panelGame";
 	public static String stringGameOver = "panelGameOver";
 	CardLayout cards;
@@ -33,6 +28,8 @@ public class BaseFrame extends JFrame
 		PanelRegistration panelRegistration = new PanelRegistration();
 		PanelPlayersOnline panelPlayersOnline = new PanelPlayersOnline();
 		PanelTopPlayers panelTopPlayers = new PanelTopPlayers();
+		PanelPlayerStatistic panelPlayerStatistic  = new PanelPlayerStatistic();
+		PanelGameList panelGameList = new PanelGameList();
 		PanelGame panelGame = new PanelGame();
 		PanelGameOver panelGameOver = new PanelGameOver();
 		
@@ -41,6 +38,8 @@ public class BaseFrame extends JFrame
 		this.add(stringRegistration,panelRegistration);
 		this.add(stringPlayersOnline,panelPlayersOnline);
 		this.add(stringTopPlayers,panelTopPlayers);
+		this.add(stringTopPlayers,panelPlayerStatistic);
+		this.add(stringTopPlayers,panelGameList);
 		this.add(stringGame,panelGame);
 		this.add(stringGameOver,panelGameOver);
 		

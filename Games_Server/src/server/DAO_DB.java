@@ -40,7 +40,7 @@ public class DAO_DB {
 		Connection conn = DriverManager.getConnection("jdbc:h2:tcp://localhost/~/games", "sa", "");
         
         Statement st = conn.createStatement();
-        st.execute("insert into user values ("+user.getUserName()+", '"+user.getEmail()+"', '"+user.getPassword()+"')");
+        st.execute("insert into user values ("+1+",'"+user.getUserName()+"', '"+user.getEmail()+"', '"+user.getPassword()+"')");
 		
         st.close();
         conn.close();
