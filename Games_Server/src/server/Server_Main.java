@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class Server_Main {
@@ -14,7 +15,7 @@ public class Server_Main {
 	private static ArrayList<Sockets> socketsList = new ArrayList<>();
 
 
-	public static void main(String[] args) throws IOException, NoSuchFieldException, SecurityException
+	public static void main(String[] args) throws IOException, NoSuchFieldException, SecurityException, ClassNotFoundException, SQLException
 	{
 		ServerSocket serverSocket = new ServerSocket(7000);
 		
