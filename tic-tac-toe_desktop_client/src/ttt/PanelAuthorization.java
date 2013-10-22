@@ -15,6 +15,7 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
@@ -46,21 +47,23 @@ public class PanelAuthorization extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+				JFrame parentFrame = (JFrame)PanelAuthorization.this.getParent().getParent().getParent().getParent();
 				User user = new User();
 				user.setKeyWord("authorization");
 				user.setUserName(textUserName.getText());
 				user.setPassword(textPassword.getText());
 				try {
-					Security.authorization(user);
+					if(Security.authorization(user)){
+						CardLayout cards = (CardLayout) parentFrame.getContentPane().getLayout();
+						cards.show(parentFrame.getContentPane(), BaseFrame.stringGameList);
+					}else{
+						JOptionPane.showMessageDialog(parentFrame,
+							    "Log in failed. Try again");
+					}
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				
-				BaseFrame frame = (BaseFrame) PanelAuthorization.this.getParent().getParent().getParent().getParent();
-				CardLayout cards = (CardLayout) frame.getContentPane().getLayout();
-				cards.show(frame.getContentPane(), BaseFrame.stringPlayersOnline);
 			}
 		});
 		

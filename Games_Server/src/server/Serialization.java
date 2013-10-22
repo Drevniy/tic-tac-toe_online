@@ -8,9 +8,12 @@ import com.google.gson.reflect.TypeToken;
 
 public class Serialization {
 
-	public static Object toJSON(Object o){
+	public static String toJSON(User user){
 		
-		return null;
+		Gson gson = new Gson();
+		String jsonString = gson.toJson(user);
+		
+		return jsonString;
 		
 	}
 	

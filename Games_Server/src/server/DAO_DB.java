@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 
 public class DAO_DB {
-
+	
 	public static ArrayList<User> getUsers() throws ClassNotFoundException, SQLException {
 
 		Class.forName("org.h2.Driver");
@@ -40,7 +40,7 @@ public class DAO_DB {
 		Connection conn = DriverManager.getConnection("jdbc:h2:tcp://localhost/~/games", "sa", "");
         
         Statement st = conn.createStatement();
-        st.execute("insert into user values ("+1+",'"+user.getUserName()+"', '"+user.getEmail()+"', '"+user.getPassword()+"')");
+        st.execute("insert into user values ("+(getMaxId(user)+1)+",'"+user.getUserName()+"', '"+user.getPassword()+"', '"+user.getEmail()+"')");
 		
         st.close();
         conn.close();
@@ -60,7 +60,6 @@ public class DAO_DB {
         if (result.next())
         {
         	res = result.getString("password");
-        	
         }		
         
         st.close();
@@ -69,4 +68,26 @@ public class DAO_DB {
         return res;
 	}
 
+	public static int getMaxId(User user) throws ClassNotFoundException, SQLException {
+		 int res = 0;
+		
+		Class.forName("org.h2.Driver");
+		Connection conn = DriverManager.getConnection("jdbc:h2:tcp://localhost/~/games", "sa", "");
+        
+        Statement st = conn.createStatement();
+        ResultSet result;
+        result = st.executeQuery("select max(id) from user");
+        
+        
+        if (result.next())
+        {
+        	res = result.getInt("max(id)");
+        }		
+        
+        st.close();
+        conn.close();
+        
+        return res;
+	}
+	
 }

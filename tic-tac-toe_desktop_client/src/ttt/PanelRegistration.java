@@ -5,13 +5,13 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.net.UnknownHostException;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
@@ -20,11 +20,9 @@ public class PanelRegistration extends JPanel {
 	private JTextField textUserName;
 	private JTextField textEmail;
 	private JTextField textPassword;
-
-	/**
-	 * Create the panel.
-	 */
+	
 	public PanelRegistration() {
+		
 		
 		JLabel lblRegistration = new JLabel("Registration");
 		lblRegistration.setFont(new Font("Tahoma", Font.PLAIN, 40));
@@ -53,6 +51,8 @@ public class PanelRegistration extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				JFrame parentFrame = (JFrame)PanelRegistration.this.getParent().getParent().getParent().getParent();
+
 				User user = new User();
 				user.setKeyWord("registration");
 				user.setUserName(textUserName.getText());
@@ -60,7 +60,16 @@ public class PanelRegistration extends JPanel {
 				user.setPassword(textPassword.getText());
 				
 				try {
-					Security.registration(user);
+					if(Security.registration(user)){
+
+						JOptionPane.showMessageDialog(parentFrame,
+							    "Registration was successful. Please log in");
+						CardLayout cards = (CardLayout) parentFrame.getContentPane().getLayout();
+						cards.show(parentFrame.getContentPane(), BaseFrame.stringAuthorization);
+					}else{
+						JOptionPane.showMessageDialog(parentFrame,
+							    "Registration failed. Try again");
+					}
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -73,7 +82,8 @@ public class PanelRegistration extends JPanel {
 		btnCancel.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				((JFrame)PanelRegistration.this.getParent().getParent().getParent().getParent()).dispose();
+				JFrame parentFrame = (JFrame)PanelRegistration.this.getParent().getParent().getParent().getParent();
+				parentFrame.dispose();
 			}
 		});
 		GroupLayout groupLayout = new GroupLayout(this);

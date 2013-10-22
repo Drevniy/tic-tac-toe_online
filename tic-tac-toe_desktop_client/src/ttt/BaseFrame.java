@@ -33,13 +33,12 @@ public class BaseFrame extends JFrame
 		PanelGame panelGame = new PanelGame();
 		PanelGameOver panelGameOver = new PanelGameOver();
 		
-		
 		this.add(stringAuthorization,panelAuthorization);
 		this.add(stringRegistration,panelRegistration);
 		this.add(stringPlayersOnline,panelPlayersOnline);
 		this.add(stringTopPlayers,panelTopPlayers);
-		this.add(stringTopPlayers,panelPlayerStatistic);
-		this.add(stringTopPlayers,panelGameList);
+		this.add(stringPlayerStatistic,panelPlayerStatistic);
+		this.add(stringGameList,panelGameList);
 		this.add(stringGame,panelGame);
 		this.add(stringGameOver,panelGameOver);
 		
