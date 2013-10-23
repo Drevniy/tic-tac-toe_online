@@ -28,6 +28,10 @@ public class Security {
 		// этот socket надо сохранить и работать с ним дальше
         if(userAnswer.getKeyWord().equals("AuthorizationSuccessful"))
         {
+        	InputWorker inputWorker = new InputWorker(socket);
+        	Thread inputThread = new Thread(inputWorker);
+        	inputThread.start();
+        	
         	res = true;
         }else{
         	res=false;

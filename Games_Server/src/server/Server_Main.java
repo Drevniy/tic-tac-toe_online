@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class Server_Main {
 	
 	private static String inputString = "";
-	private static ArrayList<Sockets> socketsList = new ArrayList<>();
+	private static ArrayList<UserSocket> socketsList = new ArrayList<>();
 
 
 	/**
@@ -56,7 +56,7 @@ public class Server_Main {
 
 			if(user.getKeyWord().equals("authorization")){
 				if(Security.authorization(user)){
-					Sockets newSocket = new Sockets();
+					UserSocket newSocket = new UserSocket();
 					newSocket.setSocket(socket);
 					newSocket.setUserName(user.getUserName());
 					getSocketsList().add(newSocket);
@@ -83,7 +83,7 @@ public class Server_Main {
 	}
 
 
-	synchronized public static ArrayList<Sockets> getSocketsList() {
+	synchronized public static ArrayList<UserSocket> getSocketsList() {
 		return socketsList;
 	}
 

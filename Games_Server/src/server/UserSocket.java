@@ -2,7 +2,7 @@ package server;
 
 import java.net.Socket;
 
-public class Sockets {
+public class UserSocket {
 	private Socket socket;
 	private String userName = "";
 	
