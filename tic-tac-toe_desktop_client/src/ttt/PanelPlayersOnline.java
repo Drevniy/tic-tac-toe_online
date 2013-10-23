@@ -5,10 +5,15 @@ import java.awt.Font;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.io.IOException;
 
 public class PanelPlayersOnline extends JPanel {
 
@@ -20,12 +25,28 @@ public class PanelPlayersOnline extends JPanel {
 		JLabel lblPlayersOnline = new JLabel("players online:");
 		lblPlayersOnline.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		
-		JScrollPane scrollPane = new JScrollPane();
+		TableModel_PlayersOnline tableModel = null;
+		try {
+			tableModel = new TableModel_PlayersOnline();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		JTable table = new JTable();
+		table.setModel(tableModel);
+		JScrollPane scrollPane = new JScrollPane(table);
 		
 		JButton btnPlayWith = new JButton("<html><center>Play with selected<br /> player</center></html>");
 		btnPlayWith.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		
 		JButton btnCancel = new JButton("Cancel");
+		btnCancel.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFrame parentFrame = (JFrame)PanelPlayersOnline.this.getParent().getParent().getParent().getParent();
+				parentFrame.dispose();
+				System.exit(0);
+			}
+		});
 		btnCancel.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
@@ -35,7 +56,7 @@ public class PanelPlayersOnline extends JPanel {
 					.addComponent(lblPlayersOnline, GroupLayout.PREFERRED_SIZE, 199, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap(241, Short.MAX_VALUE))
 				.addComponent(scrollPane, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
-				.addGroup(groupLayout.createSequentialGroup()
+				.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(btnPlayWith, GroupLayout.PREFERRED_SIZE, 158, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED, 116, Short.MAX_VALUE)
@@ -48,12 +69,12 @@ public class PanelPlayersOnline extends JPanel {
 					.addContainerGap()
 					.addComponent(lblPlayersOnline, GroupLayout.PREFERRED_SIZE, 31, GroupLayout.PREFERRED_SIZE)
 					.addGap(18)
-					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 263, GroupLayout.PREFERRED_SIZE)
+					.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 244, GroupLayout.PREFERRED_SIZE)
 					.addGap(18)
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addComponent(btnCancel, GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE)
 						.addComponent(btnPlayWith, GroupLayout.DEFAULT_SIZE, 47, Short.MAX_VALUE))
-					.addGap(12))
+					.addGap(31))
 		);
 		setLayout(groupLayout);
 

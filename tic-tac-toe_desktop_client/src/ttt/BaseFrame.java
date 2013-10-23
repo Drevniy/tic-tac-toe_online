@@ -19,26 +19,26 @@ public class BaseFrame extends JFrame
 	public BaseFrame()
 	{
 		setBounds(320, 200, 450, 425);
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("Tic-Tac-Toe");
 		cards = new CardLayout();
 		setLayout(cards);
 		
 		PanelAuthorization panelAuthorization = new PanelAuthorization();
 		PanelRegistration panelRegistration = new PanelRegistration();
-		PanelPlayersOnline panelPlayersOnline = new PanelPlayersOnline();
+		
 		PanelTopPlayers panelTopPlayers = new PanelTopPlayers();
 		PanelPlayerStatistic panelPlayerStatistic  = new PanelPlayerStatistic();
-		PanelGameList panelGameList = new PanelGameList();
+		
 		PanelGame panelGame = new PanelGame();
 		PanelGameOver panelGameOver = new PanelGameOver();
 		
 		this.add(stringAuthorization,panelAuthorization);
 		this.add(stringRegistration,panelRegistration);
-		this.add(stringPlayersOnline,panelPlayersOnline);
+		
 		this.add(stringTopPlayers,panelTopPlayers);
 		this.add(stringPlayerStatistic,panelPlayerStatistic);
-		this.add(stringGameList,panelGameList);
+		
 		this.add(stringGame,panelGame);
 		this.add(stringGameOver,panelGameOver);
 		

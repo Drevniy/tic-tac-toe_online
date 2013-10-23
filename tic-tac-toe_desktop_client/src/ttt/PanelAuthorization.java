@@ -54,6 +54,9 @@ public class PanelAuthorization extends JPanel {
 				user.setPassword(textPassword.getText());
 				try {
 					if(Security.authorization(user)){
+						Lists.getPlayersOnlineList();
+						PanelGameList panelGameList = new PanelGameList();
+						parentFrame.add(BaseFrame.stringGameList,panelGameList);
 						CardLayout cards = (CardLayout) parentFrame.getContentPane().getLayout();
 						cards.show(parentFrame.getContentPane(), BaseFrame.stringGameList);
 					}else{

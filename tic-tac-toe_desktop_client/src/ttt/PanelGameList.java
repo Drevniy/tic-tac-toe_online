@@ -1,15 +1,19 @@
 package ttt;
 
+import java.awt.CardLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.SwingConstants;
 
@@ -17,19 +21,28 @@ public class PanelGameList extends JPanel {
 
 	/**
 	 * Create the panel.
+	 * @throws IOException 
 	 */
-	public PanelGameList() {
+	public PanelGameList() throws IOException {
 		
 		JLabel lblChooseGame = new JLabel("Choose game:");
 		lblChooseGame.setFont(new Font("Dialog", Font.PLAIN, 34));
 		lblChooseGame.setHorizontalAlignment(SwingConstants.LEFT);
 		
-		JScrollPane scrollPane = new JScrollPane();
+		TableModel_GameList tableModel = new TableModel_GameList();
+		JTable table = new JTable();
+		table.setModel(tableModel);
+		JScrollPane scrollPane = new JScrollPane(table);
 		
 		JButton btnOk = new JButton("Ok");
 		btnOk.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				JFrame parentFrame = (JFrame)PanelGameList.this.getParent().getParent().getParent().getParent();
+				PanelPlayersOnline panelPlayersOnline = new PanelPlayersOnline();
+				parentFrame.add(BaseFrame.stringPlayersOnline,panelPlayersOnline);
+				CardLayout cards = (CardLayout) parentFrame.getContentPane().getLayout();
+				cards.show(parentFrame.getContentPane(), BaseFrame.stringPlayersOnline);
 			}
 		});
 		GroupLayout groupLayout = new GroupLayout(this);

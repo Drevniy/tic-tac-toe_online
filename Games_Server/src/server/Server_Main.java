@@ -29,7 +29,11 @@ public class Server_Main {
 	{
 		ServerSocket serverSocket = new ServerSocket(7000);
 		System.out.println("server started");
-		while(true){
+	       
+	       Thread thread = new Thread(new SocketsWorker());
+	       thread.start();
+	       
+	       while(true){
 			Socket socket = serverSocket.accept();
 			InputStream socketin = socket.getInputStream();
 			DataInputStream in = new DataInputStream(socketin);

@@ -35,6 +35,7 @@ public class Security
 			if(DAO_DB.getPassword(user).equals(user.getPassword()))
 			{
 				res = true;
+				
 			}
 			
 		}

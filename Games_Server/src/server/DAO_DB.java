@@ -89,5 +89,29 @@ public class DAO_DB {
         
         return res;
 	}
-	
+	public static User getGameList() throws ClassNotFoundException, SQLException {
+		 		
+		Class.forName("org.h2.Driver");
+		Connection conn = DriverManager.getConnection("jdbc:h2:tcp://localhost/~/games", "sa", "");
+       
+       Statement st = conn.createStatement();
+       ResultSet result;
+       result = st.executeQuery("select * from namegame");
+       
+       User user = new User();
+       user.setKeyWord("gameList");
+       if (result.next())
+       {
+       	user.setGame1(result.getString("game"));
+       }	
+       if (result.next())
+       {
+    	   user.setGame2(result.getString("game"));
+       }
+       
+       st.close();
+       conn.close();
+       
+       return user;
+	}
 }
