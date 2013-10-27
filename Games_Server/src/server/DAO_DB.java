@@ -6,11 +6,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import data_transfer.*;
 
 
 public class DAO_DB {
 	
-	public static ArrayList<User> getUsers() throws ClassNotFoundException, SQLException {
+	public static ArrayList<String> getUserNameList() throws ClassNotFoundException, SQLException {
 
 		Class.forName("org.h2.Driver");
 		Connection conn = DriverManager.getConnection("jdbc:h2:tcp://localhost/~/games", "sa", "");
@@ -19,34 +20,31 @@ public class DAO_DB {
         ResultSet result;
         result = st.executeQuery("select * from user");
         
-        ArrayList<User> userList =  new  ArrayList<>();
+        ArrayList<String> userNameList =  new  ArrayList<>();
         
         while (result.next())
         {
-        	User user = new User(); 
-        	user.setUserName(result.getString("username"));
-        	userList.add(user);
-        	
+        	userNameList.add(result.getString("username"));
         }
         st.close();
         conn.close();
 		
-		return userList;
+		return userNameList;
 	}
 
-	public static void createUser(User user) throws ClassNotFoundException, SQLException {
+	public static void createUser(Security_Registration registration) throws ClassNotFoundException, SQLException {
 		
 		Class.forName("org.h2.Driver");
 		Connection conn = DriverManager.getConnection("jdbc:h2:tcp://localhost/~/games", "sa", "");
         
         Statement st = conn.createStatement();
-        st.execute("insert into user values ("+(getMaxId(user)+1)+",'"+user.getUserName()+"', '"+user.getPassword()+"', '"+user.getEmail()+"')");
+        st.execute("insert into user values ("+(getMaxId()+1)+",'"+registration.getUserName()+"', '"+registration.getPassword()+"', '"+registration.getEmail()+"')");
 		
         st.close();
         conn.close();
 	}
 
-	public static String getPassword(User user) throws ClassNotFoundException, SQLException {
+	public static String getPassword(String username) throws ClassNotFoundException, SQLException {
 		String res = "";
 		
 		Class.forName("org.h2.Driver");
@@ -54,7 +52,7 @@ public class DAO_DB {
         
         Statement st = conn.createStatement();
         ResultSet result;
-        result = st.executeQuery("select password from user where username like '"+user.getUserName()+"'");
+        result = st.executeQuery("select password from user where username like '"+username+"'");
         
         
         if (result.next())
@@ -68,7 +66,7 @@ public class DAO_DB {
         return res;
 	}
 
-	public static int getMaxId(User user) throws ClassNotFoundException, SQLException {
+	public static int getMaxId() throws ClassNotFoundException, SQLException {
 		 int res = 0;
 		
 		Class.forName("org.h2.Driver");
@@ -89,7 +87,7 @@ public class DAO_DB {
         
         return res;
 	}
-	public static User getGameList() throws ClassNotFoundException, SQLException {
+	public static Player getGameList() throws ClassNotFoundException, SQLException {
 		 		
 		Class.forName("org.h2.Driver");
 		Connection conn = DriverManager.getConnection("jdbc:h2:tcp://localhost/~/games", "sa", "");
@@ -98,20 +96,11 @@ public class DAO_DB {
        ResultSet result;
        result = st.executeQuery("select * from namegame");
        
-       User user = new User();
-       user.setKeyWord("gameList");
-       if (result.next())
-       {
-       	user.setGame1(result.getString("game"));
-       }	
-       if (result.next())
-       {
-    	   user.setGame2(result.getString("game"));
-       }
+       Player player = new Player();
        
        st.close();
        conn.close();
        
-       return user;
+       return player;
 	}
 }

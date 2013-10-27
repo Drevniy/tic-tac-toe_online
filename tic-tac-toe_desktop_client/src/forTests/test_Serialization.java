@@ -17,8 +17,10 @@ public class test_Serialization {
 		list.setEmail("dfghdxf@xfdhgfh,drydrt");
 		list.setPassword("fgjfgjhgh");
 		
-		System.out.println(Serialization.toJSON(list));
-		System.out.println(Serialization.getClassType(Serialization.toJSON(list)));
+		String res = Serialization.toJSON(list);
+		Class className = Serialization.getClassType(res).getClass();
+		className.n
+		Serialization<className> ser = new Serialization<>();
 		
 	}
 

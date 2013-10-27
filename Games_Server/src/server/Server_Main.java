@@ -13,19 +13,14 @@ import java.util.ArrayList;
 
 public class Server_Main {
 	
-	private static String inputString = "";
-	private static ArrayList<UserSocket> socketsList = new ArrayList<>();
+	private static ArrayList<Player> playerList = new ArrayList<>();
 
 
 	/**
 	 * @param args
 	 * @throws IOException
-	 * @throws NoSuchFieldException
-	 * @throws SecurityException
-	 * @throws ClassNotFoundException
-	 * @throws SQLException
 	 */
-	public static void main(String[] args) throws IOException, NoSuchFieldException, SecurityException, ClassNotFoundException, SQLException
+	public static void main(String[] args) throws IOException
 	{
 		ServerSocket serverSocket = new ServerSocket(7000);
 		System.out.println("server started");
@@ -35,60 +30,15 @@ public class Server_Main {
 	       
 	       while(true){
 			Socket socket = serverSocket.accept();
-			InputStream socketin = socket.getInputStream();
-			DataInputStream in = new DataInputStream(socketin);
-			inputString = in.readUTF();
-			
-			User user = Serialization.fromJSON(inputString);
-			if(user.getKeyWord().equals("registration")){
-				if(Security.registration(user)){
-					OutputStream socketOut = socket.getOutputStream();
-					DataOutputStream out = new DataOutputStream(socketOut);
-					user.setKeyWord("RegistrationSuccessful");
-					out.writeUTF(Serialization.toJSON(user));
-					out.flush();
-					socket.close();
-				}else{
-					OutputStream socketOut = socket.getOutputStream();
-					DataOutputStream out = new DataOutputStream(socketOut);
-					user.setKeyWord("RegistrationFailed");
-					out.writeUTF(Serialization.toJSON(user));
-					out.flush();
-					socket.close();
-				}
-			}
-
-			if(user.getKeyWord().equals("authorization")){
-				if(Security.authorization(user)){
-					UserSocket newSocket = new UserSocket();
-					newSocket.setSocket(socket);
-					newSocket.setUserName(user.getUserName());
-					getSocketsList().add(newSocket);
-					
-					OutputStream socketOut = socket.getOutputStream();
-					DataOutputStream out = new DataOutputStream(socketOut);
-					user.setKeyWord("AuthorizationSuccessful");
-					out.writeUTF(Serialization.toJSON(user));
-					out.flush();
-					
-				}else{
-					OutputStream socketOut = socket.getOutputStream();
-					DataOutputStream out = new DataOutputStream(socketOut);
-					user.setKeyWord("AuthorizationFailed");
-					out.writeUTF(Serialization.toJSON(user));
-					out.flush();
-				}
-				//System.out.println(getSocketsList().get(0).getUserName());
-			}
-			
-			//socketin.flush();
-		}
+			Player newPlayer = new Player();
+			newPlayer.setSocketConnect(socket);
+	       }
 
 	}
 
 
-	synchronized public static ArrayList<UserSocket> getSocketsList() {
-		return socketsList;
+	synchronized public static ArrayList<Player> getPlayerList() {
+		return playerList;
 	}
 
 }

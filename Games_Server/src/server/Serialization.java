@@ -1,4 +1,4 @@
-package ttt;
+package server;
 
 import java.lang.reflect.Type;
 
