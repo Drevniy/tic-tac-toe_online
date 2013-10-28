@@ -13,9 +13,6 @@ import java.util.ArrayList;
 
 public class Server_Main {
 	
-	private static ArrayList<Player> playerList = new ArrayList<>();
-
-
 	/**
 	 * @param args
 	 * @throws IOException
@@ -32,14 +29,11 @@ public class Server_Main {
 			Socket socket = serverSocket.accept();
 			Player newPlayer = new Player();
 			newPlayer.setSocketConnect(socket);
-			getPlayerList().add(newPlayer);
+			ListConnectedPlayers.getList().add(newPlayer);
 	       }
 
 	}
 
 
-	synchronized public static ArrayList<Player> getPlayerList() {
-		return playerList;
-	}
 
 }

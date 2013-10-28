@@ -12,10 +12,12 @@ import data_transfer.*;
 public class InputDataWorker implements Runnable
 {
 	String jsonString;
+	Player player;
 	Socket socket;
 	
-	public InputDataWorker(Socket socket) throws IOException {
+	public InputDataWorker(Socket socket,  Player player) throws IOException {
 		this.socket = socket;
+		this.player = player;
 		
 		InputStream socketIn = socket.getInputStream();
 		DataInputStream in = new DataInputStream(socketIn);
@@ -67,6 +69,7 @@ public class InputDataWorker implements Runnable
 			
 			if(authorization.getPassword().equals(password)){
 				authorizationOut.setResult(true);
+				player.setPlayerName(authorization.getUserName());
 			}
 			
 			OutputDataWorker.sendOut(socket, Serialization.toJSON(authorizationOut));
