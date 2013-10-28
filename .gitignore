@@ -2,4 +2,4 @@ bin
 .metadata
 *~
 target/
-*.classpath
+.classpath
