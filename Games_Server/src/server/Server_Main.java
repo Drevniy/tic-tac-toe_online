@@ -32,6 +32,7 @@ public class Server_Main {
 			Socket socket = serverSocket.accept();
 			Player newPlayer = new Player();
 			newPlayer.setSocketConnect(socket);
+			getPlayerList().add(newPlayer);
 	       }
 
 	}

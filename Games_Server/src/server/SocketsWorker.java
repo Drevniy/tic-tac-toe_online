@@ -25,7 +25,7 @@ public class SocketsWorker implements Runnable
 		{
 			for (int i=0;i<socketsList.size();i++)
 			{
-				if(socketsList.get(i).getSocketConnect().isClosed()||socketsList.get(i).getSocketGame().isClosed()){
+				if(socketsList.get(i).getSocketConnect().isClosed()&&socketsList.get(i).getSocketGame().isClosed()){
 					socketsList.remove(i);
 				}else{
 

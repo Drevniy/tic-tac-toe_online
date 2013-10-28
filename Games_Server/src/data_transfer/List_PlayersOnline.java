@@ -1,5 +1,9 @@
 package data_transfer;
 
-public class List_PlayersOnline {
+import java.util.ArrayList;
 
+import server.*;
+
+public class List_PlayersOnline {
+	ArrayList<Player> playerList = new ArrayList<>();
 }
