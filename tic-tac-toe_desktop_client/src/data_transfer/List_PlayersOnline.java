@@ -2,17 +2,18 @@ package data_transfer;
 
 import java.util.ArrayList;
 
-import ttt.User;
 
 public class List_PlayersOnline {
-	ArrayList<User> userList = null;
+	final String className  = "List_PlayersOnline";
+	
+	private ArrayList<String> playersOnlineList = null;
 
-	public ArrayList<User> getUserList() {
-		return userList;
+	public ArrayList<String> getPlayersOnlineList() {
+		return playersOnlineList;
 	}
 
-	public void setUserList(ArrayList<User> userList) {
-		this.userList = userList;
+	public void setGameList(ArrayList<String> playersOnlineList) {
+		this.playersOnlineList = playersOnlineList;
 	}
 	
 	

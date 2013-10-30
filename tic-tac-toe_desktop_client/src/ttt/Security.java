@@ -22,7 +22,6 @@ public class Security {
 		DataOutputStream out = new DataOutputStream(socketOut);
 		out.writeUTF(Serialization.toJSON(authorization)); // отсылаем введенную строку текста серверу.
         socketOut.flush();
-		socketOut.close();
 		
         InputStream socketin = socketConnect.getInputStream();
 		DataInputStream in = new DataInputStream(socketin);
@@ -49,7 +48,6 @@ public class Security {
 		DataOutputStream out = new DataOutputStream(socketOut);
 		out.writeUTF(Serialization.toJSON(registration)); // отсылаем введенную строку текста серверу.
 		socketOut.flush();
-		socketOut.close();
 		
 		InputStream socketin = socketConnect.getInputStream();
 		DataInputStream in = new DataInputStream(socketin);

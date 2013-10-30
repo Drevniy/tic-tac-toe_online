@@ -16,23 +16,15 @@ import java.awt.event.ActionEvent;
 import java.io.IOException;
 
 public class PanelPlayersOnline extends JPanel {
-
-	/**
-	 * Create the panel.
-	 */
+	BaseFrame parentFrame;
+	
 	public PanelPlayersOnline() {
 		
 		JLabel lblPlayersOnline = new JLabel("players online:");
 		lblPlayersOnline.setFont(new Font("Tahoma", Font.PLAIN, 25));
 		
-		TableModel_PlayersOnline tableModel = null;
-		try {
-			tableModel = new TableModel_PlayersOnline();
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
 		JTable table = new JTable();
+		TableModel_PlayersOnline tableModel = new TableModel_PlayersOnline(BaseFrame.getSocketConnect(),table);
 		table.setModel(tableModel);
 		JScrollPane scrollPane = new JScrollPane(table);
 		
@@ -42,7 +34,7 @@ public class PanelPlayersOnline extends JPanel {
 		JButton btnCancel = new JButton("Cancel");
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JFrame parentFrame = (JFrame)PanelPlayersOnline.this.getParent().getParent().getParent().getParent();
+				parentFrame = (BaseFrame)PanelPlayersOnline.this.getParent().getParent().getParent().getParent();
 				parentFrame.dispose();
 				System.exit(0);
 			}

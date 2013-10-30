@@ -23,10 +23,9 @@ public class PanelRegistration extends JPanel {
 	private JTextField textEmail;
 	private JTextField textPassword;
 	
-	BaseFrame parentFrame = null;
+	BaseFrame parentFrame;
 	
 	public PanelRegistration() {
-		parentFrame = (BaseFrame)PanelRegistration.this.getParent().getParent().getParent().getParent();
 		
 		JLabel lblRegistration = new JLabel("Registration");
 		lblRegistration.setFont(new Font("Tahoma", Font.PLAIN, 40));
@@ -55,6 +54,8 @@ public class PanelRegistration extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				parentFrame = (BaseFrame)PanelRegistration.this.getParent().getParent().getParent().getParent();
+				
 				Security_Registration registration = new Security_Registration();
 				registration.setUserName(textUserName.getText());
 				registration.setEmail(textEmail.getText());
@@ -83,7 +84,9 @@ public class PanelRegistration extends JPanel {
 		btnCancel.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				parentFrame = (BaseFrame)PanelRegistration.this.getParent().getParent().getParent().getParent();
 				parentFrame.dispose();
+				System.exit(0);
 			}
 		});
 		GroupLayout groupLayout = new GroupLayout(this);

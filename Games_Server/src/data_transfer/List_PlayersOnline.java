@@ -2,8 +2,19 @@ package data_transfer;
 
 import java.util.ArrayList;
 
-import server.*;
 
 public class List_PlayersOnline {
-	ArrayList<Player> playerList = new ArrayList<>();
+	final String className  = "List_PlayersOnline";
+	
+	private ArrayList<String> playersOnlineList = null;
+
+	public ArrayList<String> getPlayersOnlineList() {
+		return playersOnlineList;
+	}
+
+	public void setPlayersOnlineList(ArrayList<String> playersOnlineList) {
+		this.playersOnlineList = playersOnlineList;
+	}
+	
+	
 }

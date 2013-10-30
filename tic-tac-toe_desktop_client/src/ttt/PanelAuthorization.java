@@ -30,7 +30,6 @@ public class PanelAuthorization extends JPanel {
 	
 	public PanelAuthorization()
 	{
-		parentFrame = (BaseFrame)PanelAuthorization.this.getParent().getParent().getParent().getParent();
 		
 		JLabel lblAuthorization = new JLabel("Authorization");
 		lblAuthorization.setFont(new Font("Tahoma", Font.PLAIN, 40));
@@ -58,6 +57,8 @@ public class PanelAuthorization extends JPanel {
 				authorization.setPassword(textPassword.getText());
 				try {
 					if(Security.authorization(authorization)){
+						parentFrame = (BaseFrame)PanelAuthorization.this.getParent().getParent().getParent().getParent();
+
 						parentFrame.setUserName(textUserName.getText());
 						CardLayout cards = (CardLayout) parentFrame.getContentPane().getLayout();
 						cards.show(parentFrame.getContentPane(), BaseFrame.stringGameList);
@@ -76,6 +77,8 @@ public class PanelAuthorization extends JPanel {
 		btnRegistration.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnRegistration.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				parentFrame = (BaseFrame)PanelAuthorization.this.getParent().getParent().getParent().getParent();
+
 				CardLayout cards = (CardLayout) parentFrame.getContentPane().getLayout();
 				cards.show(parentFrame.getContentPane(), "panelRegistration");
 			}
@@ -85,6 +88,8 @@ public class PanelAuthorization extends JPanel {
 		btnCancel.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				parentFrame = (BaseFrame)PanelAuthorization.this.getParent().getParent().getParent().getParent();
+
 				parentFrame.dispose();
 				System.exit(0);
 			}
@@ -145,7 +150,7 @@ public class PanelAuthorization extends JPanel {
 		);
 		setLayout(groupLayout);
 
-	
+
 	}
 
 }

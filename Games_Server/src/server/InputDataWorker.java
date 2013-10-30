@@ -41,11 +41,36 @@ public class InputDataWorker implements Runnable
 	}
 	
 	private void inList_Game(){
-		List_Game listGame = Serialization.fromJSON2List_Game(jsonString);
+		
+		try {
+			List_Game listGame = new List_Game();
+			listGame.setGameList(DAO_DB.getGameList());
+			
+			OutputDataWorker.sendOut(socket, Serialization.toJSON(listGame));
+		} catch (ClassNotFoundException | SQLException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 	
 	private void inList_PlayersOnline(){
-		List_PlayersOnline playersOnline = Serialization.fromJSON2List_PlayersOnline(jsonString);
+		List_PlayersOnline listPlayersOnline = new List_PlayersOnline();
+		ArrayList<String> playerOnlineList = new ArrayList<>();
+		for (int i = 0; i < ListConnectedPlayers.getList().size(); i++) {
+			if(ListConnectedPlayers.getList().get(i).getPlayerName().equals("")){
+			}else{
+				playerOnlineList.add(ListConnectedPlayers.getList().get(i).getPlayerName());
+			}
+		}
+		
+		listPlayersOnline.setPlayersOnlineList(playerOnlineList);
+		try {
+			OutputDataWorker.sendOut(socket, Serialization.toJSON(listPlayersOnline));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	private void inList_PlayerStatistic(){
@@ -70,9 +95,11 @@ public class InputDataWorker implements Runnable
 			if(authorization.getPassword().equals(password)){
 				authorizationOut.setResult(true);
 				player.setPlayerName(authorization.getUserName());
+				OutputDataWorker.sendOut(socket, Serialization.toJSON(authorizationOut));
+				OutputDataWorker.sendListPlayersOnline();
+			}else{
+				OutputDataWorker.sendOut(socket, Serialization.toJSON(authorizationOut));
 			}
-			
-			OutputDataWorker.sendOut(socket, Serialization.toJSON(authorizationOut));
 			
 		} catch (ClassNotFoundException | SQLException | IOException e) {
 			// TODO Auto-generated catch block
@@ -86,10 +113,15 @@ public class InputDataWorker implements Runnable
 		try {
 			Security_Registration registrationOut = new Security_Registration();
 			ArrayList<String> userNameList = DAO_DB.getUserNameList();
+			boolean res = true;
 			for (int i = 0; i < userNameList.size(); i++) {
 				if(userNameList.get(i).equals(registration.getUserName())){
-					registrationOut.setResult(true);
+					res = false;
 				}
+			}
+			if(res){
+				DAO_DB.createUser(registration);
+				registrationOut.setResult(res);
 			}
 			OutputDataWorker.sendOut(socket, Serialization.toJSON(registrationOut));
 			

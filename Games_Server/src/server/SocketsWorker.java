@@ -20,10 +20,9 @@ public class SocketsWorker implements Runnable
 		{
 			for (int i=0;i<ListConnectedPlayers.getList().size();i++)
 			{
-				if(ListConnectedPlayers.getList().get(i).getSocketConnect().isClosed()&&ListConnectedPlayers.getList().get(i).getSocketGame().isClosed()){
-					ListConnectedPlayers.getList().remove(i);
-				}else{
-
+				//if(ListConnectedPlayers.getList().get(i).getSocketConnect().isClosed()&&ListConnectedPlayers.getList().get(i).getSocketGame().isClosed())
+					//ListConnectedPlayers.getList().remove(i);
+				
 						Socket socket = ListConnectedPlayers.getList().get(i).getSocketConnect();
 						try {
 							InputStream socketin = socket.getInputStream();
@@ -34,7 +33,7 @@ public class SocketsWorker implements Runnable
 						} catch (IOException e) {
 							e.printStackTrace();
 						}
-				}
+				
 			}
 		}
 	}

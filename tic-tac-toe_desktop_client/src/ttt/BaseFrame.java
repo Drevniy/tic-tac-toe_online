@@ -18,8 +18,8 @@ public class BaseFrame extends JFrame
 	public final static String stringGame = "panelGame";
 	public final static String stringGameOver = "panelGameOver";
 	CardLayout cards;
-	String userName = "";
-	Socket socketConnect = null;
+	private static String userName;
+	private static Socket socketConnect;
 	 
 	public BaseFrame()
 	{
@@ -49,6 +49,8 @@ public class BaseFrame extends JFrame
 		this.add(stringGame,panelGame);
 		this.add(stringGameOver,panelGameOver);
 		
+		Thread thread = new Thread(new InputWorker());
+		thread.start();
 		
 		setVisible(true);
 		
@@ -74,15 +76,15 @@ public class BaseFrame extends JFrame
 		return cards;
 	}
 
-	public String getUserName() {
+	public static String getUserName() {
 		return userName;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public static void setUserName(String userNameIn) {
+		userName = userNameIn;
 	}
 
-	public Socket getSocketConnect() {
+	public static Socket getSocketConnect() {
 		return socketConnect;
 	}
 

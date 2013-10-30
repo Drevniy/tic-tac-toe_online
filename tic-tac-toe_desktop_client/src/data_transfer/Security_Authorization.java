@@ -2,7 +2,7 @@ package data_transfer;
 
 public class Security_Authorization
 {
-private String className  = "Security_Authorization";
+	final String className  = "Security_Authorization";
 	
 	private String userName = "";
 	private String password = "";

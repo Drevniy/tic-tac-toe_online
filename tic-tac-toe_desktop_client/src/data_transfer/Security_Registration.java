@@ -1,7 +1,7 @@
 package data_transfer;
 
 public class Security_Registration {
-	private String className  = "Security_Registration";
+	final String className  = "Security_Registration";
 	
 	private String userName = "";
 	private String email 	= "";
@@ -10,9 +10,6 @@ public class Security_Registration {
 	
 	public String getClassName() {
 		return className;
-	}
-	public void setClassName(String className) {
-		this.className = className;
 	}
 	public String getUserName() {
 		return userName;

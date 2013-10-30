@@ -71,11 +71,8 @@ public class DAO_DB {
 		
 		Class.forName("org.h2.Driver");
 		Connection conn = DriverManager.getConnection("jdbc:h2:tcp://localhost/~/games", "sa", "");
-        
         Statement st = conn.createStatement();
-        ResultSet result;
-        result = st.executeQuery("select max(id) from user");
-        
+        ResultSet result = st.executeQuery("select max(id) from user");
         
         if (result.next())
         {
@@ -87,20 +84,24 @@ public class DAO_DB {
         
         return res;
 	}
-	public static Player getGameList() throws ClassNotFoundException, SQLException {
+	public static ArrayList<String> getGameList() throws ClassNotFoundException, SQLException {
 		 		
 		Class.forName("org.h2.Driver");
 		Connection conn = DriverManager.getConnection("jdbc:h2:tcp://localhost/~/games", "sa", "");
        
        Statement st = conn.createStatement();
-       ResultSet result;
-       result = st.executeQuery("select * from namegame");
+       ResultSet result = st.executeQuery("select * from namegame");
        
-       Player player = new Player();
+       ArrayList<String> gameList = new ArrayList<String>();
+       while (result.next())
+       {
+    	   gameList.add(result.getString("game"));
+       }
        
        st.close();
        conn.close();
        
-       return player;
+       return gameList;
 	}
+
 }
