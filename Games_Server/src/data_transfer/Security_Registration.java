@@ -32,7 +32,7 @@ public class Security_Registration {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public boolean isResult() {
+	public boolean getResult() {
 		return result;
 	}
 	public void setResult(boolean result) {

@@ -6,7 +6,7 @@ import java.io.OutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
 
-public class Lists {
+public class requestLists {
 
 	public static void getPlayersOnlineList() throws IOException{
 		

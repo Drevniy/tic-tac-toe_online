@@ -18,13 +18,13 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.SwingConstants;
 
 public class PanelGameList extends JPanel {
-
+	BaseFrame parentFrame = null;
 	/**
 	 * Create the panel.
 	 * @throws IOException 
 	 */
-	public PanelGameList() throws IOException {
-		
+	public PanelGameList() {
+		parentFrame = (BaseFrame)PanelGameList.this.getParent().getParent().getParent().getParent();
 		JLabel lblChooseGame = new JLabel("Choose game:");
 		lblChooseGame.setFont(new Font("Dialog", Font.PLAIN, 34));
 		lblChooseGame.setHorizontalAlignment(SwingConstants.LEFT);
@@ -38,9 +38,6 @@ public class PanelGameList extends JPanel {
 		btnOk.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				JFrame parentFrame = (JFrame)PanelGameList.this.getParent().getParent().getParent().getParent();
-				PanelPlayersOnline panelPlayersOnline = new PanelPlayersOnline();
-				parentFrame.add(BaseFrame.stringPlayersOnline,panelPlayersOnline);
 				CardLayout cards = (CardLayout) parentFrame.getContentPane().getLayout();
 				cards.show(parentFrame.getContentPane(), BaseFrame.stringPlayersOnline);
 			}

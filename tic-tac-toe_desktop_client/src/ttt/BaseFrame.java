@@ -1,23 +1,30 @@
 package ttt;
 
 import java.awt.CardLayout;
+import java.io.IOException;
+import java.net.Socket;
+import java.net.UnknownHostException;
 
 import javax.swing.JFrame;
 
 public class BaseFrame extends JFrame
 {
-	public static String stringAuthorization = "panelAuthorization";
-	public static String stringRegistration = "panelRegistration";
-	public static String stringPlayersOnline = "panelPlayersOnline";
-	public static String stringTopPlayers = "panelTopPlayers";
-	public static String stringPlayerStatistic = "panelPlayerStatistic";
-	public static String stringGameList = "panelGameList";
-	public static String stringGame = "panelGame";
-	public static String stringGameOver = "panelGameOver";
+	public final static String stringAuthorization = "panelAuthorization";
+	public final static String stringRegistration = "panelRegistration";
+	public final static String stringPlayersOnline = "panelPlayersOnline";
+	public final static String stringTopPlayers = "panelTopPlayers";
+	public final static String stringPlayerStatistic = "panelPlayerStatistic";
+	public final static String stringGameList = "panelGameList";
+	public final static String stringGame = "panelGame";
+	public final static String stringGameOver = "panelGameOver";
 	CardLayout cards;
+	String userName = "";
+	Socket socketConnect = null;
 	 
 	public BaseFrame()
 	{
+		createConnect();
+		
 		setBounds(320, 200, 450, 425);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("Tic-Tac-Toe");
@@ -26,28 +33,57 @@ public class BaseFrame extends JFrame
 		
 		PanelAuthorization panelAuthorization = new PanelAuthorization();
 		PanelRegistration panelRegistration = new PanelRegistration();
-		
+		PanelGameList panelGameList = new PanelGameList();
 		PanelTopPlayers panelTopPlayers = new PanelTopPlayers();
 		PanelPlayerStatistic panelPlayerStatistic  = new PanelPlayerStatistic();
-		
+		PanelPlayersOnline panelPlayersOnline = new PanelPlayersOnline();
 		PanelGame panelGame = new PanelGame();
 		PanelGameOver panelGameOver = new PanelGameOver();
 		
 		this.add(stringAuthorization,panelAuthorization);
 		this.add(stringRegistration,panelRegistration);
-		
+		this.add(BaseFrame.stringGameList,panelGameList);
 		this.add(stringTopPlayers,panelTopPlayers);
 		this.add(stringPlayerStatistic,panelPlayerStatistic);
-		
+		this.add(BaseFrame.stringPlayersOnline,panelPlayersOnline);
 		this.add(stringGame,panelGame);
 		this.add(stringGameOver,panelGameOver);
 		
 		
 		setVisible(true);
+		
 	}
 	
+	private void createConnect() {
+		try {
+			socketConnect = new Socket("127.0.0.1",7000);
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		Security.setSocketConnect(socketConnect);
+		
+	}
+
 	public CardLayout getCards()
 	{
 		return cards;
 	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public Socket getSocketConnect() {
+		return socketConnect;
+	}
+
 }

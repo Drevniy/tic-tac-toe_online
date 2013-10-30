@@ -9,7 +9,7 @@ import javax.swing.table.TableModel;
 public class TableModel_GameList implements TableModel
 {
 	private static User user;
-
+	
 	public TableModel_GameList() throws IOException {
 		//this.user = Lists.getGameList();
 	}

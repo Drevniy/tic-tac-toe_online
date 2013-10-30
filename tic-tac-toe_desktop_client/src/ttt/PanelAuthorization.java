@@ -20,12 +20,18 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
+import data_transfer.Security_Authorization;
+
 public class PanelAuthorization extends JPanel {
 	private JTextField textUserName;
 	private JTextField textPassword;
+	BaseFrame parentFrame = null;
+
 	
 	public PanelAuthorization()
 	{
+		parentFrame = (BaseFrame)PanelAuthorization.this.getParent().getParent().getParent().getParent();
+		
 		JLabel lblAuthorization = new JLabel("Authorization");
 		lblAuthorization.setFont(new Font("Tahoma", Font.PLAIN, 40));
 		
@@ -47,16 +53,12 @@ public class PanelAuthorization extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JFrame parentFrame = (JFrame)PanelAuthorization.this.getParent().getParent().getParent().getParent();
-				User user = new User();
-				user.setKeyWord("authorization");
-				user.setUserName(textUserName.getText());
-				user.setPassword(textPassword.getText());
+				Security_Authorization authorization = new Security_Authorization();
+				authorization.setUserName(textUserName.getText());
+				authorization.setPassword(textPassword.getText());
 				try {
-					if(Security.authorization(user)){
-						Lists.getPlayersOnlineList();
-						PanelGameList panelGameList = new PanelGameList();
-						parentFrame.add(BaseFrame.stringGameList,panelGameList);
+					if(Security.authorization(authorization)){
+						parentFrame.setUserName(textUserName.getText());
 						CardLayout cards = (CardLayout) parentFrame.getContentPane().getLayout();
 						cards.show(parentFrame.getContentPane(), BaseFrame.stringGameList);
 					}else{
@@ -74,9 +76,8 @@ public class PanelAuthorization extends JPanel {
 		btnRegistration.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnRegistration.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				BaseFrame frame = (BaseFrame) PanelAuthorization.this.getParent().getParent().getParent().getParent();
-				CardLayout cards = (CardLayout) frame.getContentPane().getLayout();
-				cards.show(frame.getContentPane(), "panelRegistration");
+				CardLayout cards = (CardLayout) parentFrame.getContentPane().getLayout();
+				cards.show(parentFrame.getContentPane(), "panelRegistration");
 			}
 		});
 		
@@ -84,7 +85,8 @@ public class PanelAuthorization extends JPanel {
 		btnCancel.setFont(new Font("Tahoma", Font.PLAIN, 18));
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				((JFrame)PanelAuthorization.this.getParent().getParent().getParent().getParent()).dispose();
+				parentFrame.dispose();
+				System.exit(0);
 			}
 		});
 		GroupLayout groupLayout = new GroupLayout(this);

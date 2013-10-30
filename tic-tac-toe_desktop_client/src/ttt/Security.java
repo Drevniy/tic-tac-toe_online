@@ -8,54 +8,55 @@ import java.io.OutputStream;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
+import data_transfer.*;
+	
 
 public class Security {
+	private static Socket socketConnect;
 	
-	public static boolean authorization(User user) throws UnknownHostException, IOException{
+	public static boolean authorization(Security_Authorization authorization) throws UnknownHostException, IOException{
 		
 		boolean res = false;
 		
-		Socket socket = new Socket("127.0.0.1",7000);
-		OutputStream socketOut = socket.getOutputStream();
+		OutputStream socketOut = socketConnect.getOutputStream();
 		DataOutputStream out = new DataOutputStream(socketOut);
-		out.writeUTF(Serialization.toJSON(user)); // отсылаем введенную строку текста серверу.
-        out.flush(); // заставляем поток закончить передачу данных.
-        
-        InputStream socketin = socket.getInputStream();
+		out.writeUTF(Serialization.toJSON(authorization)); // отсылаем введенную строку текста серверу.
+        socketOut.flush();
+		socketOut.close();
+		
+        InputStream socketin = socketConnect.getInputStream();
 		DataInputStream in = new DataInputStream(socketin);
-		String inputString = in.readUTF();
-		User userAnswer = Serialization.fromJSON(inputString);
-		// этот socket надо сохранить и работать с ним дальше
-        if(userAnswer.getKeyWord().equals("AuthorizationSuccessful"))
+		String jsonString = in.readUTF();
+		Security_Authorization authorizationAnswer = Serialization.fromJSON2Security_Authorization(jsonString);
+        if(authorizationAnswer.getResult())
         {
-        	InputWorker inputWorker = new InputWorker(socket);
+        	/*InputWorker inputWorker = new InputWorker(socket);
         	Thread inputThread = new Thread(inputWorker);
-        	inputThread.start();
+        	inputThread.start();*/
         	
         	res = true;
         }else{
         	res=false;
-        	socket.close();
         }
 		return res;
 		
 	}
 	
-	public static boolean registration(User user) throws UnknownHostException, IOException{
+	public static boolean registration(Security_Registration registration) throws UnknownHostException, IOException{
 		boolean res = false;
 		
-		Socket socket = new Socket("127.0.0.1",7000);
-		OutputStream socketOut = socket.getOutputStream();
+		OutputStream socketOut = socketConnect.getOutputStream();
 		DataOutputStream out = new DataOutputStream(socketOut);
-		out.writeUTF(Serialization.toJSON(user)); // отсылаем введенную строку текста серверу.
+		out.writeUTF(Serialization.toJSON(registration)); // отсылаем введенную строку текста серверу.
+		socketOut.flush();
+		socketOut.close();
 		
-		InputStream socketin = socket.getInputStream();
+		InputStream socketin = socketConnect.getInputStream();
 		DataInputStream in = new DataInputStream(socketin);
-		String inputString = in.readUTF();
-		User userAnswer = Serialization.fromJSON(inputString);
-        socket.close();
+		String jsonString = in.readUTF();
+		Security_Registration registrationAnswer = Serialization.fromJSON2Security_Registration(jsonString);
 		
-        if(userAnswer.getKeyWord().equals("RegistrationSuccessful"))
+        if(registrationAnswer.getResult())
         {
         	res = true;
         }else{
@@ -65,4 +66,13 @@ public class Security {
 		return res;
 		
 	}
+
+	public static Socket getSocketConnect() {
+		return socketConnect;
+	}
+
+	public static void setSocketConnect(Socket socketConnect) {
+		Security.socketConnect = socketConnect;
+	}
+	
 }

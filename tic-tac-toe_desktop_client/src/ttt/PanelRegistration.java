@@ -16,13 +16,17 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
+import data_transfer.Security_Registration;
+
 public class PanelRegistration extends JPanel {
 	private JTextField textUserName;
 	private JTextField textEmail;
 	private JTextField textPassword;
 	
+	BaseFrame parentFrame = null;
+	
 	public PanelRegistration() {
-		
+		parentFrame = (BaseFrame)PanelRegistration.this.getParent().getParent().getParent().getParent();
 		
 		JLabel lblRegistration = new JLabel("Registration");
 		lblRegistration.setFont(new Font("Tahoma", Font.PLAIN, 40));
@@ -51,16 +55,13 @@ public class PanelRegistration extends JPanel {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				JFrame parentFrame = (JFrame)PanelRegistration.this.getParent().getParent().getParent().getParent();
-
-				User user = new User();
-				user.setKeyWord("registration");
-				user.setUserName(textUserName.getText());
-				user.setEmail(textEmail.getText());
-				user.setPassword(textPassword.getText());
+				Security_Registration registration = new Security_Registration();
+				registration.setUserName(textUserName.getText());
+				registration.setEmail(textEmail.getText());
+				registration.setPassword(textPassword.getText());
 				
 				try {
-					if(Security.registration(user)){
+					if(Security.registration(registration)){
 
 						JOptionPane.showMessageDialog(parentFrame,
 							    "Registration was successful. Please log in");
@@ -82,7 +83,6 @@ public class PanelRegistration extends JPanel {
 		btnCancel.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				JFrame parentFrame = (JFrame)PanelRegistration.this.getParent().getParent().getParent().getParent();
 				parentFrame.dispose();
 			}
 		});
