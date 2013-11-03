@@ -58,8 +58,11 @@ public class PanelAuthorization extends JPanel {
 				try {
 					if(Security.authorization(authorization)){
 						parentFrame = (BaseFrame)PanelAuthorization.this.getParent().getParent().getParent().getParent();
-
 						parentFrame.setUserName(textUserName.getText());
+						
+						Thread thread = new Thread(new InputWorker());
+						thread.start();
+						
 						CardLayout cards = (CardLayout) parentFrame.getContentPane().getLayout();
 						cards.show(parentFrame.getContentPane(), BaseFrame.stringGameList);
 					}else{

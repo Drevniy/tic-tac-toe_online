@@ -1,20 +1,13 @@
 package forTests;
 
-import static org.junit.Assert.*;
-
-import java.util.ArrayList;
-
 import org.junit.Test;
 
 import ttt.Serialization;
-import ttt.User;
-
-import data_transfer.List_PlayersOnline;
 import data_transfer.Security_Registration;
 
 public class test_Serialization {
 
-	@Test
+	//@Test
 	public void test() {
 		
 		data_transfer.Security_Registration list = new Security_Registration();
@@ -26,26 +19,21 @@ public class test_Serialization {
 		System.out.println(res);
 		
 	}
-
+	
 	@Test
-	public void test2() {
-		
-		List_PlayersOnline playerList = new List_PlayersOnline();
-		ArrayList<User> userList = new ArrayList<>();
-		User user = new User();
-		user.setUserName("Саша");
-		User user1 = new User();
-		user1.setUserName("Петя");
-		
-		userList.add(user);
-		userList.add(user1);
-		
-		playerList.setUserList(userList);
-		
-		
-		String res = Serialization.toJSON(playerList);
-		System.out.println(res);
-		
-	}
+		public void test1() {
+			
+		for (int i = 0; i < 100; i++) {
+			System.out.print((int) Math.round(30*Math.random()+20)+" ");
+		}
+		System.out.println();
+		for (int i = 0; i < 1000; i++) {
+			System.out.print((int)Math.round(100*Math.random())+", ");
+		}	
+		System.out.println();
+		for (int i = 0; i < 100; i++) {
+			System.out.print((int) Math.round(30*Math.random()-20)+", ");
+		}
+		}
 	
 }

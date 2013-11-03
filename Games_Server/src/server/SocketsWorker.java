@@ -20,20 +20,22 @@ public class SocketsWorker implements Runnable
 		{
 			for (int i=0;i<ListConnectedPlayers.getList().size();i++)
 			{
-				//if(ListConnectedPlayers.getList().get(i).getSocketConnect().isClosed()&&ListConnectedPlayers.getList().get(i).getSocketGame().isClosed())
-					//ListConnectedPlayers.getList().remove(i);
-				
-						Socket socket = ListConnectedPlayers.getList().get(i).getSocketConnect();
-						try {
-							InputStream socketin = socket.getInputStream();
-							if(socketin.available()!=0){
-								Thread thread = new Thread(new InputDataWorker(socket, ListConnectedPlayers.getList().get(i)));
-								thread.start();
-							}
-						} catch (IOException e) {
-							e.printStackTrace();
+				if(ListConnectedPlayers.getList().get(i).getSocketConnect().isClosed()
+						&&ListConnectedPlayers.getList().get(i).getSocketGame().isClosed()){
+					ListConnectedPlayers.getList().remove(i);
+					OutputDataWorker.sendListPlayersOnline();
+				}else{
+					Socket socket = ListConnectedPlayers.getList().get(i).getSocketConnect();
+					try {
+						InputStream socketin = socket.getInputStream();
+						if(socketin.available()!=0){
+							Thread thread = new Thread(new InputDataWorker(socket, ListConnectedPlayers.getList().get(i)));
+							thread.start();
 						}
-				
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
 			}
 		}
 	}

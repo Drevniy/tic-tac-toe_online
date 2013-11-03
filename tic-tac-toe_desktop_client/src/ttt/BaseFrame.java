@@ -49,9 +49,6 @@ public class BaseFrame extends JFrame
 		this.add(stringGame,panelGame);
 		this.add(stringGameOver,panelGameOver);
 		
-		Thread thread = new Thread(new InputWorker());
-		thread.start();
-		
 		setVisible(true);
 		
 	}
